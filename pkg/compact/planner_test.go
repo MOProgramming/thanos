@@ -48,7 +48,7 @@ func (p *tsdbPlannerAdapter) Plan(_ context.Context, metasByMinTime []*metadata.
 
 	var res []*metadata.Meta
 	for _, pdir := range plan {
-		meta, err := metadata.Read(pdir)
+		meta, err := metadata.ReadFromDir(pdir)
 		if err != nil {
 			return nil, errors.Wrapf(err, "read meta from %s", pdir)
 		}

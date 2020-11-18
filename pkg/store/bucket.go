@@ -2054,7 +2054,7 @@ func (r *bucketIndexReader) decodeSeriesWithReq(b []byte, lbls *labels.Labels, c
 		*lbls = append(*lbls, labels.Label{Name: ln, Value: lv})
 	}
 
-	// Read the chunks meta data.
+	// ReadFromDir the chunks meta data.
 	k = d.Uvarint()
 
 	if k == 0 {
@@ -2227,7 +2227,7 @@ func (r *bucketChunkReader) loadChunks(ctx context.Context, offs []uint32, seq i
 
 		fetchBegin = time.Now()
 
-		// Read entire chunk into new buffer.
+		// ReadFromDir entire chunk into new buffer.
 		nb, err := r.block.readChunkRange(ctx, seq, int64(o), int64(chLen))
 		if err != nil {
 			return errors.Wrapf(err, "preloaded chunk too small, expecting %d, and failed to fetch full chunk", chLen)
